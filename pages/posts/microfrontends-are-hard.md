@@ -3,7 +3,7 @@ title: Micro Frontends are hard
 date: 2024/7/30
 description: My personal take about distributed frontend development.
 tag: frontend, microfrontend
-author: You
+author:
 ---
 ## Intro
 
