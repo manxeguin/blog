@@ -26,7 +26,7 @@ When you build multiple different applications, there are some cross-cutting con
 
 How can we solve this? Should we create some npm libraries and just tell the teams to put them in their request middlewares? While this could work, it is difficult to ensure that each team integrates all those utilities properly or does not accidentally remove some.
 
-Besides, current NextJS middleware does not allow the use of Node.js runtime APIs since it is meant to be executed in Vercel Edge, and maybe some library you use is using some Node.js API.
+Besides, current NextJS [middleware does not allow the use of Node.js runtime APIs](https://github.com/vercel/next.js/discussions/46722) since it is meant to be executed in Vercel Edge, and maybe some library you use is using some Node.js API.
 
 So, how can we ensure all teams implement all topics mentioned above without having them include all the libraries and modify their codebase? Ideally, we want those features already solved for each team without them even being aware of it.
 
