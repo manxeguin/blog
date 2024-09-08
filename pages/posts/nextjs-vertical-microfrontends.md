@@ -32,7 +32,7 @@ So, how can we ensure all teams implement all topics mentioned above without hav
 
 ## OpenNext
 
-As I said before, [OpenNext](https://open-next.js.org/) OpenNext is an open-source framework that allows you to create your own implementation of your NextJS request handler. By default, it contains wrappers to deploy it to AWS Lambda, but version 3 allows you to define your own wrapper of the NextJS request handler, which is very useful in case you want to customize each NextJS app you build with all the features mentioned above.
+As I said before, [OpenNext](https://open-next.js.org/) is an open-source framework that allows you to create your own implementation of your NextJS request handler. By default, it contains wrappers to deploy it to AWS Lambda, but version 3 allows you to define your own wrapper of the NextJS request handler, which is very useful in case you want to customize each NextJS app you build with all the features mentioned above.
 
 Here’s an example of how to add your custom request handler. This code snippet demonstrates the configuration for OpenNext:
 
@@ -91,7 +91,14 @@ Basically, what the previous code does is modify the request object and the resp
 
 With this capability, the only thing you need to do is build each app with the same configuration. So, how can we create all our apps with that configuration?
 
-We can create a CLI utility that builds the NextJS app using the same config. Each team that builds their NextJS app with that CLI will have all those features by default without modifying anything in their repo/codebase (of course, you will need to ensure all apps are built using that command, but that can be enforced easily).
+We can create a CLI utility that builds the NextJS app using the same config. So instead of running the default npm task,
+we could create our custom one that relies on our custom OpenNext build.
+
+```javascript
+build: "custom-nextjs-build"
+```
+
+Each team building their NextJS app with that CLI will have all those features by default without modifying anything in their repo/codebase (of course, you will need to ensure all apps are built using that command, but that can be enforced easily).
 
 Then we will use Docker to containerize the solution and upload our Docker image to our image registry (ECR).
 
@@ -128,7 +135,7 @@ The architecture should look something like this:
 
 ![Diagram](../../images/aws_diagram.png)
 
-**Note:** *This is a simplified version of how the architecture could be, we are not covering networking (VPCs, how to restrict ingress/egress traffic, etc.), security or how to deploy the static assets to each S3 bucket or the CI/CD process. These aspects can vary significantly depending on your needs and are outside the scope of this post*
+**Note:** *This is a simplified version of how the architecture could be, we are not covering networking (VPCs, how to restrict ingress/egress traffic, etc.), security (WAF), Identity access with IAM roles/policies or how to deploy the static assets to each S3 bucket or the CI/CD process. These aspects can vary significantly depending on your needs and are outside the scope of this post*
 
 ## Other Cloud Providers
 In the example I’ve shared how we can deploy the apps to AWS, but actually, since it is a containerized solution, the same pattern can be applied to any other cloud provider or on-premise solution. We are not using any vendor lock solution here. For example, we could have solved the Auth part using an AWS API Gateway + Lambda Authorizer, or even a Cloudfront Lambda Edge, but we are solving the common features at code layer not infra layer. Deploying this in GCP using Google Cloud Run + a reverse proxy should not be much different from this (or even a Raspberry Pi!).
