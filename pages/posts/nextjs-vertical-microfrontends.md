@@ -98,7 +98,10 @@ we could create our custom one that relies on our custom OpenNext build.
 build: "custom-nextjs-build"
 ```
 
-Each team building their NextJS app with that CLI will have all those features by default without modifying anything in their repo/codebase (of course, you will need to ensure all apps are built using that command, but that can be enforced easily).
+Each team building their NextJS app with that CLI will have all those features by default without modifying anything in their repo/codebase (of course, you will need to ensure all apps are built using that command, but that can be enforced easily, for example, in the CI/CD pipelines).
+
+
+[Here is an example of how the CLI could look like](https://github.com/manxeguin/open-next-v3-demo/tree/main/packages/custom-server)
 
 Then we will use Docker to containerize the solution and upload our Docker image to our image registry (ECR).
 
@@ -144,5 +147,7 @@ That is why I like the solution using the OpenNext wrapper; it allows us to solv
 
 ## Wrap Up
 In conclusion, using OpenNext to manage vertical micro frontends with NextJS in AWS allows teams to focus on their specific applications while ensuring that essential cross-cutting concerns are addressed. By implementing a CLI utility and containerizing the solution, we can streamline the development process and enhance collaboration among engineering teams. As you explore this approach, consider how it can be adapted to your own projects and the unique challenges you face.
+
+[Here is a repo](https://github.com/manxeguin/open-next-v3-demo/) that implements a NextJS app with an injected header using OpenNext
 
 
